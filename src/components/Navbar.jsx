@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaTwitter, FaLinkedin, FaFacebook, FaInstagram, FaBars, FaTimes,FaEnvelope  } from "react-icons/fa";
+import {  FaLinkedin, FaFacebook, FaBars, FaTimes,FaEnvelope  } from "react-icons/fa";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
