@@ -1,41 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 
 const certificates = [
-
   {
-    title: "ASP.NET  Web Development by Zuitt",
+    title: "ASP.NET Core MVC",
     description: "Certified in building robust web applications using ASP.NET Core, C#, and SQL Server.",
-    url: "#",
-    issuer: "Zuitt",
-    date: "Mar 2022",
-    tech: ["ASP.NET", "C#", "SQL Server"],
+      url: "/JohnMichaelMacaraig_certficate.pdf",
+    issuer: "Zuitt Learning Institute Incorporated",
+    date: "July 2025",
+    tech: ["ASP.NET", "C#", "MS SQL Server"],
   },
   {
-    title: "PostgreSQL by Zuitt",
-    description: "Demonstrated expertise in designing, querying, and managing PostgreSQL databases effectively.",
-    url: "#",
-    issuer: "Zuitt",
-    date: "Nov 2023",
-    tech: ["PostgreSQL"],
+    title: "PHP Laravel Framework",
+    description: "Certified in developing web applications using PHP and the Laravel framework, including routing, controllers, and Eloquent ORM.",
+      url: "/JohnMichaelMacaraig_certficate.pdf",
+    issuer: "Zuitt Learning Institute Incorporated",
+    date: "January 2024",
+    tech: ["PHP", "Laravel Framework", "MS SQL Server"],
   },
   // Add more certificates here
 ];
 
 const Certificates = () => {
+  const [selectedCert, setSelectedCert] = useState(null);
+
   return (
-    <section id="Certificates" className="max-w-6xl mx-auto px-6 py-24 bg-gray-50">
+    <section id="Certificates" className="w-full px-6 py-24 bg-gray-50">
       <h2 className="text-4xl md:text-5xl font-bold mb-12 text-gray-900 text-center">
         Certificates
       </h2>
 
       <div className="grid gap-10 md:grid-cols-2">
         {certificates.map(({ title, description, url, issuer, date, tech }, idx) => (
-          <a
+          <div
             key={idx}
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group block p-8 border border-gray-200 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-white"
+            className="group cursor-pointer block p-8 border border-gray-200 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 bg-white"
+            onClick={() => setSelectedCert({ title, url })}
           >
             <h3 className="text-2xl font-semibold mb-2 text-gray-800 group-hover:text-blue-600 transition">
               {title}
@@ -54,9 +53,43 @@ const Certificates = () => {
                 </span>
               ))}
             </div>
-          </a>
+          </div>
         ))}
       </div>
+
+      {/* Modal for PDF preview */}
+      {selectedCert && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70"
+          onClick={() => setSelectedCert(null)}
+        >
+          <div
+            className="bg-white w-11/12 max-w-4xl p-6 rounded-2xl relative flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setSelectedCert(null)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-3xl font-bold"
+            >
+              &times;
+            </button>
+
+            <h3 className="text-2xl font-bold mb-4">{selectedCert.title}</h3>
+
+            {/* Embed PDF */}
+            <iframe
+              src={selectedCert.url}
+              title={selectedCert.title}
+              className="w-full h-[600px] border rounded-lg"
+            ></iframe>
+
+            <p className="mt-4 text-center text-gray-500">
+              Click outside the modal or the × button to close
+            </p>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
