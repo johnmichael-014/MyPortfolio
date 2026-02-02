@@ -3,10 +3,12 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Projects from "./components/Projects";
-
 import Skills from "./components/Skills";
 import Certificates from "./components/Certificates";
 import Contact from "./components/Contact";
+
+// ✅ Import Vercel Analytics
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   const projectsRef = useRef(null);
@@ -30,6 +32,9 @@ function App() {
       <Skills />
       <Certificates />
       <Contact />
+
+      {/* ✅ Add Vercel Analytics at the bottom */}
+      <Analytics />
     </div>
   );
 }
